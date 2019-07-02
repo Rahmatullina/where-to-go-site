@@ -1,0 +1,25 @@
+{
+    "version": 2,
+    "name": "nodejs-express",
+    "builds": [
+        { "src": "api/fill_start_page.js", "use": "@now/node" },
+        { "src": "api/fill_events_page.js", "use": "@now/node" },
+        { "src": "api/fill_event_description.js", "use": "@now/node" },
+        { "src": "start_page.html" , "use": "@now/static" },
+        { "src": "events_page.html", "use": "@now/static" },
+        { "src": "event_description.html", "use": "@now/static" },
+        { "src": "events_client.js", "use": "@now/static" },
+        { "src": "start_page_client.js", "use": "@now/static" },
+        { "src": "event_description_client.js", "use": "@now/static" },
+        { "src": "event_descr_style.css", "use": "@now/static" },
+        { "src": "events_style.css", "use": "@now/static" },
+        { "src": "start_page_styles.css", "use": "@now/static" }
+    ],
+    "routes": [
+        {"src" : "/api/start_page/location/(spb|msk)", "dest" : "/api/fill_start_page.js"},
+        {"src" : "/api/fill-event/location/(spb|msk)/category/(exhibition|concert|theater|festival|education|shopping|games)", "dest": "/api/fill_events_page.js"},
+        {"src" : "/api/get/event/[0-9]*", "dest": "/api/fill_event_description.js"}
+    ],
+    "regions": ["bru1"],
+    "alias": ["poll.ERAKHMATULLINA.name"]
+}
